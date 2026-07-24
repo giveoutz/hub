@@ -1,0 +1,907 @@
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DATA REWARD</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --text: #14213d;
+      --muted: #64748b;
+      --line: #dbe4ef;
+      --primary: #1463ff;
+      --primary-dark: #0f46b8;
+      --green: #14955f;
+      --orange: #d97706;
+      --soft-blue: #eaf1ff;
+      --soft-green: #e9f8f1;
+      --shadow: 0 14px 35px rgba(20, 33, 61, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .app {
+      margin: 0 auto;
+      max-width: 1120px;
+      padding: 18px;
+    }
+
+    .topbar {
+      align-items: center;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .logo {
+      background: var(--primary);
+      border-radius: 8px;
+      color: #fff;
+      display: grid;
+      flex: 0 0 42px;
+      font-weight: 800;
+      height: 42px;
+      place-items: center;
+      width: 42px;
+    }
+
+    .brand h1 {
+      font-size: 20px;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .brand p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 3px 0 0;
+    }
+
+    .pill {
+      background: var(--soft-blue);
+      border: 1px solid #cfe0ff;
+      border-radius: 999px;
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 12px;
+      white-space: nowrap;
+    }
+
+    .hero {
+      background: #14213d;
+      border-radius: 8px;
+      color: #fff;
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1.3fr 0.7fr;
+      margin-bottom: 16px;
+      overflow: hidden;
+      padding: 22px;
+      position: relative;
+    }
+
+    .hero::after {
+      background: rgba(255, 255, 255, 0.12);
+      content: "";
+      height: 220px;
+      position: absolute;
+      right: -80px;
+      top: -70px;
+      transform: rotate(18deg);
+      width: 180px;
+    }
+
+    .hero h2 {
+      font-size: 30px;
+      line-height: 1.1;
+      margin: 0 0 8px;
+      max-width: 520px;
+    }
+
+    .hero p {
+      color: #d9e5f7;
+      line-height: 1.55;
+      margin: 0;
+      max-width: 600px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 700;
+      min-height: 42px;
+      padding: 11px 15px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-light {
+      background: #fff;
+      color: var(--text);
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card span {
+      color: #c8d7ee;
+      font-size: 13px;
+    }
+
+    .hero-card strong {
+      display: block;
+      font-size: 34px;
+      margin: 8px 0;
+    }
+
+    .progress {
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      height: 9px;
+      overflow: hidden;
+    }
+
+    .progress i {
+      background: #3be18f;
+      display: block;
+      height: 100%;
+      width: 0;
+    }
+
+    .ad-slot {
+      background: #eef4ff;
+      border: 1px dashed #9ebcf4;
+      border-radius: 8px;
+      color: #42628f;
+      font-size: 13px;
+      line-height: 1.45;
+      margin-bottom: 16px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .ad-slot strong {
+      color: var(--primary-dark);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .tasks > .ad-slot {
+      grid-column: 1 / -1;
+    }
+
+    .stats {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-bottom: 16px;
+    }
+
+    .stat,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat {
+      padding: 15px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      display: block;
+      font-size: 13px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      margin-top: 7px;
+    }
+
+    .stat small {
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .layout {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1fr 330px;
+    }
+
+    .panel {
+      padding: 16px;
+    }
+
+    .panel + .panel {
+      margin-top: 16px;
+    }
+
+    .panel-head {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .panel h2,
+    .panel h3 {
+      font-size: 18px;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .panel-head span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .tasks {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .task {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 40px 1fr;
+      min-height: 176px;
+      padding: 12px;
+    }
+
+    .task-icon {
+      background: var(--soft-blue);
+      border-radius: 8px;
+      color: var(--primary-dark);
+      display: grid;
+      font-weight: 800;
+      height: 40px;
+      place-items: center;
+      width: 40px;
+    }
+
+    .task h3 {
+      font-size: 14px;
+      margin: 0 0 4px;
+    }
+
+    .task p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .reward {
+      color: var(--green);
+      display: block;
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-align: left;
+    }
+
+    .task .btn {
+      min-height: 36px;
+      padding: 8px 12px;
+      width: 100%;
+    }
+
+    .task-action {
+      grid-column: 1 / -1;
+      margin-top: auto;
+    }
+
+    .task.done {
+      background: var(--soft-green);
+      border-color: #bfe8d3;
+    }
+
+    .task.done .task-icon {
+      background: #d7f7e6;
+      color: var(--green);
+    }
+
+    .task.bonus-task {
+      background: #fff7ed;
+      border-color: #fdba74;
+    }
+
+    .task.bonus-task .task-icon {
+      background: #fed7aa;
+      color: #9a3412;
+    }
+
+    .task.bonus-task .reward {
+      color: #c2410c;
+      font-size: 18px;
+    }
+
+    .cooldown {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      grid-column: 1 / -1;
+      margin-bottom: 12px;
+      padding: 10px 12px;
+    }
+
+    .cooldown strong {
+      color: var(--text);
+    }
+
+    .side-list {
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .side-list li {
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      list-style: none;
+      padding: 9px 0;
+    }
+
+    .side-list li:last-child {
+      border-bottom: 0;
+    }
+
+    .side-list span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .side-list strong {
+      font-size: 14px;
+    }
+
+    .ref-box {
+      background: var(--soft-blue);
+      border: 1px solid #cfe0ff;
+      border-radius: 8px;
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 8px;
+    }
+
+    .ref-box input {
+      background: transparent;
+      border: 0;
+      color: var(--primary-dark);
+      min-width: 0;
+      outline: 0;
+      width: 100%;
+    }
+
+    .small-note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 10px 0 0;
+    }
+
+    .withdraw-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .withdraw-grid input,
+    .withdraw-grid select {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      min-height: 40px;
+      padding: 9px 10px;
+      width: 100%;
+    }
+
+    .payment-message {
+      background: rgba(15, 23, 42, 0.48);
+      border: 0;
+      bottom: 0;
+      border-radius: 8px;
+      color: var(--text);
+      display: grid;
+      left: 0;
+      margin: 0;
+      padding: 18px;
+      place-items: center;
+      position: fixed;
+      right: 0;
+      top: 0;
+      z-index: 50;
+    }
+
+    .payment-message[hidden] {
+      display: none;
+    }
+
+    .payment-box {
+      background: #ffffff;
+      border: 1px solid #bfe8d3;
+      border-radius: 8px;
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.28);
+      max-width: 480px;
+      padding: 24px;
+      text-align: center;
+      width: min(100%, 480px);
+    }
+
+    .payment-box h3 {
+      color: #116342;
+      font-size: 24px;
+      margin: 0 0 10px;
+    }
+
+    .payment-box p {
+      color: #334155;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0 0 16px;
+    }
+
+    .payment-box strong {
+      color: var(--text);
+    }
+
+    .share-progress {
+      background: #eef2f7;
+      border-radius: 999px;
+      height: 9px;
+      margin: 10px 0;
+      overflow: hidden;
+    }
+
+    .share-progress i {
+      background: var(--green);
+      display: block;
+      height: 100%;
+      width: 0;
+    }
+
+    .warning {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 8px;
+      color: #9a3412;
+      font-size: 13px;
+      line-height: 1.45;
+      margin: 10px 0 0;
+      padding: 10px;
+    }
+
+    .warning[hidden] {
+      display: none;
+    }
+
+    .toast {
+      background: var(--text);
+      border-radius: 8px;
+      bottom: 18px;
+      color: #fff;
+      left: 50%;
+      padding: 11px 14px;
+      position: fixed;
+      transform: translateX(-50%);
+    }
+
+    .toast[hidden] {
+      display: none;
+    }
+
+    @media (max-width: 850px) {
+      .hero,
+      .layout,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .tasks {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+    }
+
+    @media (max-width: 520px) {
+      .app {
+        padding: 12px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero {
+        padding: 18px;
+      }
+
+      .hero h2 {
+        font-size: 24px;
+      }
+
+      .brand h1 {
+        font-size: 18px;
+      }
+
+      .tasks {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">CB</div>
+        <div>
+          <h1>DATA REWARD</h1>
+          <p>Complete simple tasks and earn daily rewards.</p>
+        </div>
+      </div>
+      <div class="pill">FREE REWARD</div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h2>Daily Data Reward</h2>
+        <p>Open a Monetag direct-link task, wait 10 seconds before the next one, then continue earning. Complete tasks and unlock the $20 boost task to reach withdrawal faster.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" type="button" data-scroll-tasks>Start Tasks</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <span>Withdrawal progress</span>
+        <strong>$<span data-earned>0</span>/$5</strong>
+        <div class="progress"><i data-progress-bar></i></div>
+        <p class="small-note">Regular tasks add $5.</p>
+      </div>
+    </section>
+
+    
+
+    
+    <main class="layout">
+      <section class="panel" id="tasks">
+        <div class="panel-head">
+          <div>
+            <h2>Task Center</h2>
+            <span>Replace each placeholder link with your Monetag direct link.</span>
+          </div>
+          <span data-task-count>2 tasks</span>
+        </div>
+
+        <div class="tasks" data-task-list>
+          <div class="cooldown" data-cooldown-status>
+            Next task: <strong>Available now</strong>
+          </div>
+          
+        </div>
+      </section>
+
+      <aside>
+        <section class="panel">
+          <div class="panel-head">
+            <h3>Wallet</h3>
+            <span>Simple summary</span>
+          </div>
+          <ul class="side-list">
+            <li><span>Task Earnings</span><strong>$<span data-task-earnings>0.00</span></strong></li>
+            <li><span>Bonus Earnings</span><strong>$<span data-bonus-earnings>0.00</span></strong></li>
+            <li><span>Withdrawn</span><strong>$0.00</strong></li>
+            <li><span>Minimum Withdrawal</span><strong>$5.00</strong></li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h3>Withdraw</h3>
+            <span>Minimum $5</span>
+          </div>
+          <div class="share-progress"><i data-share-bar></i></div>
+          <p class="small-note"><strong data-share-count>0</strong>/7 WhatsApp shares completed.</p>
+          <div class="withdraw-grid">
+            <input type="number" min="5" value="5" placeholder="Amount" data-withdraw-amount>
+            <select data-withdraw-method>
+              <option>Bank Transfer</option>
+              <option>USDT TRC20</option>
+              <option>PayPal</option>
+            </select>
+            <input type="text" placeholder="Account name" data-account-name>
+            <input type="text" placeholder="Account number, wallet address, or email" data-account-details>
+            <button class="btn btn-primary" type="button" data-submit-withdraw>Request Withdrawal</button>
+          </div>
+          <p class="warning" data-withdraw-warning hidden>Before withdrawal is completed, share the WhatsApp message with 7 friends.</p>
+          <div class="payment-message" data-payment-message hidden></div>
+        </section>
+
+        <!-- ADS CODE PLACE: Sidebar ad. Paste square banner, native ad, or affiliate code here. -->
+        <section class="ad-slot" data-ad-slot="sidebar">
+          <strong>Sidebar Ad Area</strong>
+          Paste your ad code here.
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <!-- ADS CODE PLACE: Vignette, popunder, or social bar code.
+       Paste the script/code from your ad network below this comment.
+       Example location only. Keep it before the closing body tag. -->
+
+  <div class="toast" hidden data-toast></div>
+
+  <script>
+    const toast = document.querySelector('[data-toast]');
+    const earned = document.querySelector('[data-earned]');
+    const balance = document.querySelector('[data-balance]');
+    const totalEarnings = document.querySelector('[data-total-earnings]');
+    const taskEarnings = document.querySelector('[data-task-earnings]');
+    const bonusEarnings = document.querySelector('[data-bonus-earnings]');
+    const completedTasks = document.querySelector('[data-completed-tasks]');
+    const remainingTasks = document.querySelector('[data-remaining-tasks]');
+    const progressBar = document.querySelector('[data-progress-bar]');
+    const shareCount = document.querySelector('[data-share-count]');
+    const shareBar = document.querySelector('[data-share-bar]');
+    const cooldownStatus = document.querySelector('[data-cooldown-status] strong');
+    const withdrawWarning = document.querySelector('[data-withdraw-warning]');
+    const paymentMessage = document.querySelector('[data-payment-message]');
+    const minimumWithdrawal = 5;
+    const taskReward = 1;
+    const cooldownSeconds = 10;
+    let currentBalance = 0;
+    let currentBonus = 0;
+    let currentShares = 0;
+    let cooldownRemaining = 0;
+    let cooldownTimer = null;
+    /*
+      DIRECT LINK ADS LOCATION
+      Replace these placeholder links with your Monetag direct links.
+      You can add more links if you have them. The 51 tasks will rotate through this list.
+    */
+    const monetagLinks = [
+      'PASTE_DIRECT_LINK_1_HERE',
+      'PASTE_DIRECT_LINK_2_HERE',
+      'PASTE_DIRECT_LINK_3_HERE',
+      'PASTE_DIRECT_LINK_4_HERE',
+    ];
+    const taskNames = [
+      'Open Sponsored Page',
+      'Explore Partner Offer',
+      
+      
+      
+    ];
+
+    function renderTasks() {
+      const taskList = document.querySelector('[data-task-list]');
+      const bonusMarkup =
+        '<article class="task bonus-task">' +
+          '<div class="task-icon">B</div>' +
+          '<div>' +
+            '<h3>Mega Cash Boost</h3>' +
+            '<p>Open the special bonus link and claim a larger one-time reward.</p>' +
+          '</div>' +
+          '<div class="task-action">' +
+            '<span class="reward">$20</span>' +
+            '<button class="btn btn-primary" type="button" data-ad-task data-task-type="bonus" data-reward="20" data-ad-url="' + monetagLinks[0] + '">Open Bonus</button>' +
+          '</div>' +
+        '</article>';
+      const markup = taskNames.map((name, index) => {
+        const taskNumber = index + 1;
+        const link = monetagLinks[index % monetagLinks.length];
+        const taskMarkup = (
+          '<article class="task">' +
+            '<div class="task-icon">' + taskNumber + '</div>' +
+            '<div>' +
+              '<h3>' + name + '</h3>' +
+              '<p>Open this sponsored direct link and return to claim the task reward.</p>' +
+            '</div>' +
+            '<div class="task-action">' +
+              '<span class="reward">$' + taskReward + '</span>' +
+              '<button class="btn btn-primary" type="button" data-ad-task data-reward="' + taskReward + '" data-ad-url="' + link + '">Open Task</button>' +
+            '</div>' +
+          '</article>'
+        );
+
+        return index === 24 ? taskMarkup + bonusMarkup : taskMarkup;
+      }).join('');
+
+      taskList.insertAdjacentHTML('beforeend', markup);
+    }
+
+    function setTaskButtonsLocked(isLocked) {
+      document.querySelectorAll('[data-ad-task]').forEach((button) => {
+        if (button.closest('.task').classList.contains('done')) {
+          return;
+        }
+
+        button.disabled = isLocked;
+        button.textContent = isLocked ? 'Wait ' + cooldownRemaining + 's' : 'Open Task';
+      });
+    }
+
+    function startCooldown() {
+      cooldownRemaining = cooldownSeconds;
+      cooldownStatus.textContent = 'Wait ' + cooldownRemaining + ' seconds';
+      setTaskButtonsLocked(true);
+
+      clearInterval(cooldownTimer);
+      cooldownTimer = setInterval(() => {
+        cooldownRemaining -= 1;
+
+        if (cooldownRemaining <= 0) {
+          clearInterval(cooldownTimer);
+          cooldownTimer = null;
+          cooldownStatus.textContent = 'Available now';
+          setTaskButtonsLocked(false);
+          return;
+        }
+
+        cooldownStatus.textContent = 'Wait ' + cooldownRemaining + ' seconds';
+        setTaskButtonsLocked(true);
+      }, 1000);
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.hidden = false;
+      setTimeout(() => {
+        toast.hidden = true;
+      }, 2200);
+    }
+
+    function updateProgress() {
+      const completedCount = document.querySelectorAll('.task.done').length;
+      const totalTasks = taskNames.length + 1;
+      const remainingCount = Math.max(0, totalTasks - completedCount);
+      const taskOnlyEarnings = Math.max(0, currentBalance - currentBonus);
+
+      earned.textContent = currentBalance.toFixed(0);
+      balance.textContent = currentBalance.toFixed(2);
+      totalEarnings.textContent = currentBalance.toFixed(2);
+      taskEarnings.textContent = taskOnlyEarnings.toFixed(2);
+      bonusEarnings.textContent = currentBonus.toFixed(2);
+      completedTasks.textContent = completedCount;
+      remainingTasks.textContent = remainingCount;
+      progressBar.style.width = Math.min(100, Math.round((currentBalance / minimumWithdrawal) * 100)) + '%';
+      shareCount.textContent = currentShares;
+      shareBar.style.width = Math.min(100, currentShares * 7) + '%';
+    }
+
+    renderTasks();
+
+    document.querySelector('[data-scroll-tasks]').addEventListener('click', () => {
+      document.querySelector('#tasks').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.querySelectorAll('[data-ad-task]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (cooldownRemaining > 0) {
+          showToast('Please wait ' + cooldownRemaining + ' seconds before the next task');
+          return;
+        }
+
+        const task = button.closest('.task');
+        window.open(button.dataset.adUrl, '_blank', 'noopener,noreferrer');
+        task.classList.add('done');
+        task.querySelector('.task-icon').textContent = '✓';
+        const reward = Number(button.dataset.reward || 0);
+        currentBalance += reward;
+        if (button.dataset.taskType === 'bonus') {
+          currentBonus += reward;
+        }
+        button.textContent = 'Done';
+        button.disabled = true;
+        button.className = 'btn btn-light';
+        updateProgress();
+        startCooldown();
+        showToast('Task opened and $5 reward added');
+      });
+    });
+
+    document.querySelector('[data-submit-withdraw]').addEventListener('click', () => {
+      withdrawWarning.hidden = false;
+      paymentMessage.hidden = true;
+
+      if (currentBalance < minimumWithdrawal) {
+        showToast('Minimum withdrawal is $5');
+        return;
+      }
+
+      if (currentShares < 7) {
+        currentShares += 1;
+        const message = 'Withdrawal will be completed within 24 hours.';
+        window.open('https://wa.me/?text=' + encodeURIComponent(message), '_blank');
+        updateProgress();
+        showToast(currentShares + '/7 WhatsApp shares completed');
+        return;
+      }
+
+      const accountName = document.querySelector('[data-account-name]').value.trim();
+      const accountDetails = document.querySelector('[data-account-details]').value.trim();
+      const method = document.querySelector('[data-withdraw-method]').value;
+
+      if (!accountName || !accountDetails) {
+        showToast('Enter your account details to receive payment');
+        return;
+      }
+
+      paymentMessage.innerHTML =
+        '<div class="payment-box">' +
+          "<h3>Today's Tasks Completed</h3>" +
+          '<p>Your payment request for <strong>$' + currentBalance.toFixed(2) + '</strong> through <strong>' + method + '</strong> has been received for <strong>' + accountName + '</strong>.</p>' +
+          '<p>Payment will be processed within <strong>24 hours</strong>.</p>' +
+          '<button class="btn btn-primary" type="button" data-close-payment>Okay</button>' +
+        '</div>';
+      paymentMessage.hidden = false;
+      paymentMessage.querySelector('[data-close-payment]').addEventListener('click', () => {
+        paymentMessage.hidden = true;
+      });
+      showToast('Payment request submitted');
+    });
+
+    updateProgress();
+  </script>
+</body>
+</html>
