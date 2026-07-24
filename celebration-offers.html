@@ -365,6 +365,37 @@ text-align: center;
 background-color: rgb(194, 114, 25);
 }
     </style>
+  <style>
+        .loading-gif {
+            max-width: 500px;
+        }
+
+        .pre-loader {
+            position: fixed;
+            z-index: 100; /** make sure this is the highest value compared to all other divs **/
+            top: 0;
+            left: 0;
+            background: #191f26;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .pre-loader.hidden {
+            animation: fadeOut 5s; /** change to 1s */
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fadeOut {
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+    </style>
+
   
     <center>
         
@@ -395,7 +426,7 @@ background-color: rgb(194, 114, 25);
                
 <body>
     <div class='pre-loader'>
-    <img class='loading-gif' alt='loading' src=""/>
+    <img class='loading-gif' alt='loading' src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEmn566-NSvk0g_-E8NhDhvcmOWvwIU7wKezGVKtV7rs7Xqa9pUpUM_gPiv1WEE2brEx9NutJAVd3t1kjdf0BrClNAZ4TjPFyxyzSuX9MrC1LyiTK6q1ukajYV3z_4OmfCPDOI0vev4E9qYbm4K11xYmAETcdzKQnsLbpxqClXm623YcbIYL0irxs5_mxu/s320/1000361412.gif"/>
 </div>
 
 
@@ -688,6 +719,13 @@ $(document).click(function () {
     share = "whatsapp://send?text="+text1;
 </script>
 </script>
+
+  <script type='text/javascript'>
+    window.addEventListener('load', function () {
+        document.querySelector('.pre-loader').className += ' hidden';
+    });
+</script>
+
            <script>
     window.onhashchange=function(){jp();};
     function hh() {history.pushState(history.length+1, "message", "#"+new Date().getTime());}
