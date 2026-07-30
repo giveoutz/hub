@@ -679,11 +679,7 @@ button:hover {
 .photo-upload p{margin:8px 0 0;font-size:14px}
 </style>
 
-<div class="photo-upload" onclick="photo.click()">
-  <img id="preview" src="https://cdn-icons-png.flaticon.com/512/847/847969.png">
-  <p>Upload Passport</p>
-  <input type="file" id="photo" name="photo" accept="image/*" hidden onchange="previewPhoto(this)">
-</div>
+
 
 <script>
 function previewPhoto(i){if(i.files[0]){const r=new FileReader();r.onload=e=>preview.src=e.target.result;r.readAsDataURL(i.files[0]);}}
@@ -706,7 +702,7 @@ function previewPhoto(i){if(i.files[0]){const r=new FileReader();r.onload=e=>pre
 <!-- State dropdown -->
 <select id="state" 
         style="width: 330px; height: 56px; font-size: 18px; margin-bottom: 20px;">
-  <option value="" selected disabled>Select State</option>
+  <option value="" selected disabled>---Select State---</option>
   <option value="Abia">Abia</option>
   <option value="Adamawa">Adamawa</option>
   <option value="Akwa Ibom">Akwa Ibom</option>
@@ -766,7 +762,7 @@ function previewPhoto(i){if(i.files[0]){const r=new FileReader();r.onload=e=>pre
 <!-- Marital Status Selection -->
 
   <select id="marital status" name="gender" style="width: 330px; height: 56px; font-size: 18px; margin-bottom: 20px;">
-                    <option value="">Select Marital Status</option>
+                    <option value="">---Select Marital Status---</option>
                     <option>Single</option>
                     <option>Married</option>
                     <option>Divorced</option>
@@ -777,7 +773,7 @@ function previewPhoto(i){if(i.files[0]){const r=new FileReader();r.onload=e=>pre
 					<!-- Purpose Status Selection -->
 
   <select id="marital status" name="gender" style="width: 330px; height: 56px; font-size: 18px; margin-bottom: 20px;">
-                    <option value="">Select Purpose</option>
+                    <option value="">---Select Purpose---</option>
                     <option>Expand My Business</option>
                     <option>Start A New Business</option>
                     <option>Education Purposes</option>
@@ -787,11 +783,11 @@ function previewPhoto(i){if(i.files[0]){const r=new FileReader();r.onload=e=>pre
                    <!--  Are You A Student/Business Owner -->
 
   <select id="marital status" name="gender" style="width: 330px; height: 56px; font-size: 18px; margin-bottom: 20px;">
-                    <option value="">-----Select-----</option>
-                    <option>Expand My Business</option>
-                    <option>Start A New Business</option>
-                    <option>Education Purposes</option>
-                    <option>Other Purposes</option>
+                    <option value="">---Select---</option>
+                    <option>Student</option>
+                    <option>Business Owner</option>
+                    <option>Others</option>
+                    
                 </select>
                    
                      
